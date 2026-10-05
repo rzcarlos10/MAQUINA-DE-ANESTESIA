@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Máquina de Anestesia | Ingeniería Biomédica</title>
+
+<style>
+
+:root{
+    --bg:#041014;
+    --bg2:#07191e;
+    --card:#0a2026;
+    --card2:#0d2930;
+    --cyan:#19d3c5;
+    --cyan2:#0fb5aa;
+    --white:#f2ffff;
+    --text:#c5d8da;
+    --muted:#789094;
+    --line:rgba(25,211,197,.18);
+    --shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(25,211,197,.08), transparent 25%),
+        radial-gradient(circle at 80% 30%, rgba(25,211,197,.05), transparent 30%),
+        var(--bg);
+    color:var(--white);
+    line-height:1.6;
+}
+
+section{
+    padding:100px 7%;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+}
+
+/* ================= NAV ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(4,16,20,.88);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:17px 7%;
+}
+
+.logo{
+    color:var(--cyan);
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--cyan);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    padding-top:130px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:60px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-content{
+    max-width:720px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 15px;
+    border:1px solid var(--line);
+    color:var(--cyan);
+    border-radius:30px;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:25px;
+    background:rgba(25,211,197,.05);
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,82px);
+    line-height:.95;
+    margin-bottom:20px;
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:var(--cyan);
+}
+
+.hero h2{
+    color:#dff;
+    font-size:22px;
+    margin-bottom:20px;
+    font-weight:500;
+}
+
+.hero p{
+    color:var(--text);
+    max-width:680px;
+    font-size:17px;
+    margin-bottom:25px;
+}
+
+.team{
+    color:var(--muted);
+    font-size:14px;
+    border-left:2px solid var(--cyan);
+    padding-left:18px;
+    margin-top:25px;
+}
+
+.team strong{
+    color:var(--white);
+}
+
+.hero-image{
+    position:relative;
+}
+
+.hero-image::before{
+    content:"";
+    position:absolute;
+    inset:-30px;
+    background:rgba(25,211,197,.08);
+    filter:blur(50px);
+    z-index:-1;
+}
+
+.hero-image img{
+    width:100%;
+    max-height:560px;
+    object-fit:contain;
+    border-radius:25px;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    background:#06171b;
+}
+
+.hero-tag{
+    margin-top:15px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= TITULOS ================= */
+
+.section-number{
+    color:var(--cyan);
+    font-size:13px;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+h2.section-title{
+    font-size:42px;
+    line-height:1.1;
+    margin-bottom:18px;
+}
+
+.section-intro{
+    max-width:750px;
+    color:var(--text);
+    margin-bottom:45px;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+    background:var(--bg2);
+}
+
+.intro-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.info-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.info-box h3{
+    color:var(--cyan);
+    margin-bottom:12px;
+}
+
+.info-box p{
+    color:var(--text);
+}
+
+.highlight{
+    border-left:3px solid var(--cyan);
+    padding-left:18px;
+    margin-top:20px;
+}
+
+/* ================= TIPOS ================= */
+
+.types{
+    background:var(--bg);
+}
+
+.types-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.type-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.type-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(25,211,197,.5);
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.type-card img{
+    width:100%;
+    height:175px;
+    object-fit:contain;
+    display:block;
+    background:#06171b;
+    padding:10px;
+}
+
+.type-card-content{
+    padding:22px 22px 25px;
+}
+
+.type-number{
+    color:var(--cyan);
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.type-card h3{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.type-card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* ================= GASES ================= */
+
+.gases{
+    background:var(--bg2);
+}
+
+.gas-layout{
+    display:grid;
+    grid-template-columns:360px 1fr;
+    gap:35px;
+    align-items:start;
+}
+
+.gas-menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.gas-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:12px;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.gas-card:hover{
+    border-color:rgba(25,211,197,.5);
+    transform:translateX(5px);
+}
+
+.gas-card.active{
+    border-color:var(--cyan);
+    background:rgba(25,211,197,.08);
+}
+
+.gas-card img{
+    width:75px;
+    height:75px;
+    object-fit:contain;
+    background:#061217;
+    border-radius:10px;
+    flex-shrink:0;
+}
+
+.gas-card-text{
+    flex:1;
+}
+
+.gas-card span{
+    color:var(--cyan);
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.gas-card h3{
+    font-size:15px;
+    margin-top:3px;
+}
+
+.gas-detail{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    overflow:hidden;
+    min-height:550px;
+    box-shadow:var(--shadow);
+}
+
+.gas-detail img{
+    width:100%;
+    height:280px;
+    object-fit:contain;
+    background:#061217;
+    display:block;
+}
+
+.gas-detail-content{
+    padding:30px;
+}
+
+.gas-detail-number{
+    color:var(--cyan);
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.gas-detail h3{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.gas-detail p{
+    color:var(--text);
+    margin-bottom:20px;
+}
+
+.gas-detail ul{
+    padding-left:20px;
+    color:var(--text);
+}
+
+.gas-detail li{
+    margin-bottom:8px;
+}
+
+/* ================= ANATOMIA ================= */
+
+.anatomia{
+    background:var(--bg);
+}
+
+.anatomy-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.anatomy-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.anatomy-card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(25,211,197,.45);
+}
+
+.anatomy-card img{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    background:#061217;
+    padding:10px;
+    display:block;
+}
+
+.anatomy-content{
+    padding:22px;
+}
+
+.anatomy-content h3{
+    color:var(--cyan);
+    margin-bottom:8px;
+}
+
+.anatomy-content p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* ================= PARAMETROS ================= */
+
+.parameters{
+    background:var(--bg2);
+}
+
+.parameter-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/* MONITOR VISUAL */
+
+.monitor{
+    grid-column:1 / -1;
+    background:#02090b;
+    border:1px solid rgba(25,211,197,.35);
+    border-radius:22px;
+    padding:22px;
+    box-shadow:
+        0 0 35px rgba(25,211,197,.08),
+        inset 0 0 30px rgba(0,0,0,.5);
+    overflow:hidden;
+}
+
+.monitor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(25,211,197,.15);
+    padding-bottom:14px;
+    margin-bottom:18px;
+}
+
+.monitor-title{
+    color:var(--cyan);
+    font-size:13px;
+    letter-spacing:2px;
+}
+
+.monitor-status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#75e6a8;
+    font-size:12px;
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#54e391;
+    box-shadow:0 0 10px #54e391;
+}
+
+.monitor-screen{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:20px;
+}
+
+.waveforms{
+    background:#030c0e;
+    border:1px solid rgba(25,211,197,.1);
+    border-radius:15px;
+    padding:15px;
+}
+
+.wave-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    align-items:center;
+    min-height:72px;
+    border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.wave-row:last-child{
+    border-bottom:none;
+}
+
+.wave-label{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.wave-svg{
+    width:100%;
+    height:55px;
+}
+
+.wave-line{
+    fill:none;
+    stroke:var(--cyan);
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    filter:drop-shadow(0 0 4px rgba(25,211,197,.6));
+}
+
+.wave-line.green{
+    stroke:#54e391;
+}
+
+.wave-line.yellow{
+    stroke:#e9d35b;
+}
+
+.monitor-values{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.monitor-value{
+    background:#07181c;
+    border:1px solid rgba(25,211,197,.13);
+    border-radius:14px;
+    padding:15px;
+    min-height:105px;
+}
+
+.monitor-value span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:5px;
+}
+
+.monitor-value strong{
+    color:var(--cyan);
+    font-size:28px;
+    line-height:1;
+}
+
+.monitor-value small{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.monitor-footer{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.monitor-info{
+    background:#07181c;
+    border-radius:12px;
+    padding:12px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.monitor-info strong{
+    display:block;
+    color:var(--white);
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.monitor-info span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.parameter{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:25px;
+    border-radius:18px;
+}
+
+.parameter h3{
+    color:var(--cyan);
+    margin-bottom:8px;
+}
+
+.parameter p{
+    color:var(--text);
+    font-size:14px;
+}
+
+/* ================= SEGURIDAD ================= */
+
+.security{
+    background:var(--bg);
+}
+
+.security-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.security-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+}
+
+.security-card h3{
+    color:var(--cyan);
+    margin-bottom:10px;
+    padding-left:20px;
+}
+
+.security-card p{
+    color:var(--text);
+    font-size:14px;
+}
+
+.alert-indicator{
+    position:absolute;
+    top:25px;
+    left:25px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    box-shadow:0 0 12px currentColor;
+}
+
+.alert-critical{
+    border-color:rgba(255,70,70,.35);
+}
+
+.alert-critical .alert-indicator{
+    background:#ff4646;
+    color:#ff4646;
+    animation:pulse 1.3s infinite;
+}
+
+.alert-critical h3{
+    color:#ff6868;
+}
+
+.alert-warning{
+    border-color:rgba(255,184,77,.3);
+}
+
+.alert-warning .alert-indicator{
+    background:#ffb84d;
+    color:#ffb84d;
+    animation:pulse 1.6s infinite;
+}
+
+.alert-warning h3{
+    color:#ffbd5a;
+}
+
+.alert-caution{
+    border-color:rgba(255,218,79,.25);
+}
+
+.alert-caution .alert-indicator{
+    background:#e8d34f;
+    color:#e8d34f;
+}
+
+.alert-caution h3{
+    color:#e8d34f;
+}
+
+.alert-info{
+    border-color:rgba(25,211,197,.25);
+}
+
+.alert-info .alert-indicator{
+    background:var(--cyan);
+    color:var(--cyan);
+}
+
+.alert-info h3{
+    color:var(--cyan);
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+    50%{
+        opacity:.45;
+        transform:scale(1.4);
+    }
+}
+
+.security-note{
+    margin-top:25px;
+    padding:16px 20px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:rgba(25,211,197,.04);
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= MANTENIMIENTO ================= */
+
+.maintenance{
+    background:var(--bg2);
+}
+
+.maintenance-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.maintenance-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px;
+}
+
+.maintenance-card h3{
+    color:var(--cyan);
+    margin-bottom:12px;
+}
+
+.maintenance-card p{
+    color:var(--text);
+    font-size:14px;
+}
+
+/* ================= REFERENCIAS ================= */
+
+.reference{
+    background:var(--bg);
+}
+
+.reference-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:35px;
+}
+
+.reference-box p{
+    color:var(--text);
+    margin-bottom:12px;
+}
+
+.reference-box strong{
+    color:var(--cyan);
+}
+
+.reference-sites{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.reference-site{
+    display:block;
+    text-decoration:none;
+    background:#07181c;
+    border:1px solid rgba(25,211,197,.13);
+    border-radius:15px;
+    padding:20px;
+    transition:.3s;
+}
+
+.reference-site:hover{
+    transform:translateY(-4px);
+    border-color:rgba(25,211,197,.5);
+    background:rgba(25,211,197,.05);
+}
+
+.reference-site h3{
+    color:var(--cyan);
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.reference-site p{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.reference-site span{
+    color:var(--white);
+    font-size:12px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:40px 7%;
+    text-align:center;
+    background:#020b0e;
+}
+
+footer p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+footer strong{
+    color:var(--cyan);
+}
+
+/* ================= ANIMACION ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(25px);
+    transition:opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+    .types-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .parameter-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .hero-image{
+        max-width:700px;
+        margin:auto;
+    }
+
+    .monitor-screen{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:850px){
+
+    .gas-layout{
+        grid-template-columns:1fr;
+    }
+
+    .gas-menu{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .anatomy-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .security-grid,
+    .maintenance-grid{
+        grid-template-columns:1fr;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    .reference-sites{
+        grid-template-columns:1fr;
+    }
+
+    .monitor-footer{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:75px 5%;
+    }
+
+    .hero{
+        padding-top:110px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    h2.section-title{
+        font-size:34px;
+    }
+
+    .intro-grid,
+    .types-grid,
+    .anatomy-grid,
+    .parameter-grid,
+    .gas-menu{
+        grid-template-columns:1fr;
+    }
+
+    .gas-detail img{
+        height:230px;
+    }
+
+    .type-card img{
+        height:200px;
+    }
+
+    .monitor-values{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .monitor{
+        padding:14px;
+    }
+
+    .wave-row{
+        grid-template-columns:55px 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAV ================= -->
+
+<nav>
+
+    <div class="logo">
+        BIO · MED
+    </div>
+
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#introduccion">Introducción</a></li>
+        <li><a href="#tipos">Tipos</a></li>
+        <li><a href="#gases">Gases</a></li>
+        <li><a href="#anatomia">Anatomía</a></li>
+        <li><a href="#parametros">Parámetros</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#mantenimiento">Mantenimiento</a></li>
+    </ul>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-content reveal">
+
+        <div class="badge">
+            INGENIERÍA BIOMÉDICA
+        </div>
+
+        <h1>
+            MÁQUINA DE <span>ANESTESIA</span>
+        </h1>
+
+        <h2>
+            Dispositivo biomédico de soporte vital crítico
+        </h2>
+
+        <p>
+            Esta página web fue realizada para la materia de
+            <strong>Normativa y Legislación Biomédica</strong>, con el objetivo
+            de abordar el estudio del dispositivo biomédico Máquina de Anestesia,
+            analizando su funcionamiento, componentes, parámetros, seguridad y mantenimiento.
+        </p>
+
+        <div class="team">
+
+            <strong>Integrantes:</strong><br>
+
+            Carlos Ramírez Flores<br>
+            Brenda Cecilia Rodriguez Lopez<br>
+            Emannuel Varela Nava<br>
+            Paul Basilio Trinidad Caro
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-image reveal">
+
+        <img
+            src="https://medgill.co.uk/cdn/shop/files/Datex-OhmedaAespire7900AnesthesiaMachine.jpg?v=1728651890"
+            alt="Máquina de anestesia"
+        >
+
+        <div class="hero-tag">
+            Referencia: NOM-006-SSA3-2011
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= INTRODUCCION ================= -->
+
+<section class="intro" id="introduccion">
+
+    <div class="container">
+
+        <div class="section-number">
+            01 · INTRODUCCIÓN
+        </div>
+
+        <h2 class="section-title">
+            ¿Qué es una máquina de anestesia?
+        </h2>
+
+        <p class="section-intro">
+            La máquina de anestesia es un dispositivo biomédico diseñado para
+            administrar gases medicinales y agentes anestésicos al paciente,
+            además de proporcionar soporte ventilatorio y permitir la
+            monitorización de diferentes variables fisiológicas.
+        </p>
+
+
+        <div class="intro-grid">
+
+            <div class="info-box reveal">
+
+                <h3>
+                    Función principal
+                </h3>
+
+                <p>
+                    Su función es proporcionar una mezcla controlada de gases
+                    y agentes anestésicos, mantener una ventilación adecuada
+                    y contribuir al control de las condiciones necesarias
+                    durante un procedimiento quirúrgico.
+                </p>
+
+                <div class="highlight">
+                    La máquina de anestesia integra sistemas neumáticos,
+                    electrónicos, mecánicos y de monitorización.
+                </div>
+
+            </div>
+
+
+            <div class="info-box reveal">
+
+                <h3>
+                    Importancia biomédica
+                </h3>
+
+                <p>
+                    Debido a que participa directamente en el soporte de las
+                    funciones respiratorias durante la anestesia, su correcto
+                    funcionamiento y mantenimiento son fundamentales para
+                    disminuir riesgos y garantizar condiciones seguras de operación.
+                </p>
+
+                <div class="highlight">
+                    El personal de Ingeniería Biomédica participa en su
+                    instalación, mantenimiento, verificación y gestión tecnológica.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TIPOS ================= -->
+
+<section class="types" id="tipos">
+
+    <div class="container">
+
+        <div class="section-number">
+            02 · CLASIFICACIÓN
+        </div>
+
+        <h2 class="section-title">
+            Tipos de máquinas y sistemas anestésicos
+        </h2>
+
+        <p class="section-intro">
+            Existen diferentes configuraciones de máquinas y sistemas
+            anestésicos dependiendo de su aplicación, nivel de complejidad,
+            movilidad y forma de circulación de los gases.
+        </p>
+
+
+        <div class="types-grid">
+
+
+            <!-- 01 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://www.researchgate.net/publication/258703167/figure/fig1/AS:202890703577092@1425384321629/Basic-continuous-flow-anaesthesia-machine-with-carbon-dioxide-absorber-and-closed-circuit.png"
+                    alt="Máquina de flujo continuo"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Máquina de flujo continuo
+                    </h3>
+
+                    <p>
+                        Permite el suministro continuo de gases medicinales
+                        y agentes anestésicos hacia el sistema respiratorio.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 02 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://electromedik.com.ar/images/novedades/2020040716565420200221094550Sistemas_Mapleson.png"
+                    alt="Circuito abierto"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Circuito abierto
+                    </h3>
+
+                    <p>
+                        El gas exhalado no regresa al sistema para ser
+                        reutilizado y no existe reinhalación significativa.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 03 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://www.galemed.com/storage/media/theraphy/anesthesia-circuit/01.jpg"
+                    alt="Circuito semicerrado"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Circuito semicerrado
+                    </h3>
+
+                    <p>
+                        Permite cierto grado de reinhalación de gases,
+                        mientras una parte del gas excedente es eliminada.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 04 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://derangedphysiology.com/main/sites/default/files/sites/default/files/CICM%20Primary/F%20Respiratory%20system/Anaesthetic%20circle%20breathing%20circuit%20(Sword%20circuit)%20diagram.JPG"
+                    alt="Circuito cerrado Sword"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Circuito cerrado
+                    </h3>
+
+                    <p>
+                        El gas respiratorio circula dentro del sistema
+                        y el dióxido de carbono es eliminado mediante un absorbedor.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 05 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://www.penlon.com/app/uploads/2024/02/Prima_440-1920px.png"
+                    alt="Máquina portátil"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Máquina portátil
+                    </h3>
+
+                    <p>
+                        Diseñada para facilitar su traslado y utilización
+                        en diferentes áreas clínicas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 06 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1FvdvbIqUKv6gm99OlC1e_pbG5SYSYrm3EJrBtVqHWXYHksll-iLpJ-jh&s=10"
+                    alt="Máquina de anestesia de alta complejidad"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Alta complejidad
+                    </h3>
+
+                    <p>
+                        Integra sistemas avanzados de ventilación,
+                        monitorización, alarmas y control electrónico.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 07 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://img.medicalexpo.com/images_me/photo-mg/70055-9494187.webp"
+                    alt="Máquina de anestesia pediátrica"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        07
+                    </div>
+
+                    <h3>
+                        Anestesia pediátrica
+                    </h3>
+
+                    <p>
+                        Adaptada a las características fisiológicas y
+                        requerimientos ventilatorios de pacientes pediátricos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 08 -->
+
+            <div class="type-card reveal">
+
+                <img
+                    src="https://mindray.scene7.com/is/image/mindray/a4-advantage-product-image?$960-720$"
+                    alt="Estación de trabajo anestésica"
+                >
+
+                <div class="type-card-content">
+
+                    <div class="type-number">
+                        08
+                    </div>
+
+                    <h3>
+                        Estación de trabajo anestésica
+                    </h3>
+
+                    <p>
+                        Integra suministro de gases, vaporización,
+                        ventilación y monitorización en una misma estación.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RECORRIDO DE GASES ================= -->
+
+<section class="gases" id="gases">
+
+    <div class="container">
+
+        <div class="section-number">
+            03 · FUNCIONAMIENTO
+        </div>
+
+        <h2 class="section-title">
+            Recorrido de los gases
+        </h2>
+
+        <p class="section-intro">
+            El funcionamiento de una máquina de anestesia puede entenderse
+            como una secuencia en la que los gases son suministrados,
+            regulados, mezclados con agentes anestésicos y finalmente
+            administrados al paciente.
+        </p>
+
+
+        <div class="gas-layout">
+
+
+            <div class="gas-menu">
+
+
+                <div class="gas-card active" data-gas="0">
+
+                    <img
+                        src="https://i.ytimg.com/vi/no0jDEnxUac/maxresdefault.jpg"
+                        alt="Fuente de gases"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 01</span>
+
+                        <h3>
+                            Fuente de gases
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gas-card" data-gas="1">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBaiOs2obdttQZJ2Tuy9oZcGBoLj1eQB7F-R9KlqMC3iQGDagp9mEqe13J&s=10"
+                        alt="Regulación de presión"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 02</span>
+
+                        <h3>
+                            Regulación de presión
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gas-card" data-gas="2">
+
+                    <img
+                        src="https://www.latecnicafluidi.it/wp-content/uploads/2019/01/anest_g-Copia.gif"
+                        alt="Control de flujo"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 03</span>
+
+                        <h3>
+                            Control de flujo
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gas-card" data-gas="3">
+
+                    <img
+                        src="https://www.draeger.com/Media/Content/Products/Default/Draeger-D-Vapor-Vapor-2000-1-D-28736-2015-GruppeVapor2000.jpg"
+                        alt="Vaporización"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 04</span>
+
+                        <h3>
+                            Vaporización
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gas-card" data-gas="4">
+
+                    <img
+                        src="https://www.keebovet.com/cdn/shop/products/bellow_cropped_422x.jpg?v=1571438535"
+                        alt="Ventilación"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 05</span>
+
+                        <h3>
+                            Ventilación
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gas-card" data-gas="5">
+
+                    <img
+                        src="https://www.keebovet.com/cdn/shop/products/keebomed-anesthesia-machines-co2-circle-absorber-for-anesthesia-machine-17558078930_7fae1286-58a5-47ad-a4b4-e1cf1dad5c37_2048x.jpg?v=1571438515"
+                        alt="Eliminación de CO2"
+                    >
+
+                    <div class="gas-card-text">
+
+                        <span>ETAPA 06</span>
+
+                        <h3>
+                            Eliminación de CO₂
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="gas-detail">
+
+                <img id="gasImage" src="" alt="Etapa del recorrido de gases">
+
+                <div class="gas-detail-content">
+
+                    <div class="gas-detail-number" id="gasNumber">
+                        ETAPA 01
+                    </div>
+
+                    <h3 id="gasTitle">
+                        Fuente de gases
+                    </h3>
+
+                    <p id="gasDescription"></p>
+
+                    <ul id="gasList"></ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ANATOMIA ================= -->
+
+<section class="anatomia" id="anatomia">
+
+    <div class="container">
+
+        <div class="section-number">
+            04 · ANATOMÍA
+        </div>
+
+        <h2 class="section-title">
+            Anatomía del sistema anestésico
+        </h2>
+
+        <p class="section-intro">
+            La máquina de anestesia está formada por diferentes componentes
+            que trabajan de manera integrada para controlar el suministro
+            de gases, la administración del agente anestésico, la ventilación
+            y la monitorización del paciente.
+        </p>
+
+
+        <div class="anatomy-grid">
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSK6q7JFK-6ggfH3pxxf7dcy8O_jv5_elkKlFIZ2DUpbfY_iQHTPs2yJpYFi0xMkEbP7dfjnLMApl00i_k"
+                    alt="Flujómetros"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Flujómetros
+                    </h3>
+
+                    <p>
+                        Permiten visualizar y ajustar el flujo de los gases
+                        medicinales que ingresan al sistema.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTYjNRzO-utKD8ND5Ti5G6UqFfHTYdhynCZMMP6w4rzmoMSjNjSBcExCfpL-UnH3d2DZIfUzmonIyO9Qv8"
+                    alt="Vaporizador"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Vaporizador
+                    </h3>
+
+                    <p>
+                        Convierte el agente anestésico líquido en vapor
+                        y permite incorporarlo de forma controlada al flujo de gases.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSBDiDRi9cR5-G3sgDTOTuF7b_aEtGM3iYd-XXr2JYOEGXE-CoBLeitZXbjQq3AQ5DZeGy0xpm9J9uXUaY"
+                    alt="Absorbedor de CO2"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Absorbedor de CO₂
+                    </h3>
+
+                    <p>
+                        Utiliza material absorbente para eliminar el dióxido
+                        de carbono presente en el gas exhalado.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://sisurgical.co.in/public/uploads/product/av10-anesthesia-ventilator-image--1763795843919.png"
+                    alt="Ventilador"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Ventilador
+                    </h3>
+
+                    <p>
+                        Genera y controla los ciclos respiratorios,
+                        permitiendo establecer parámetros ventilatorios.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcT542hOM57Lc_1CiOKEH2WEgXVs9HJ0jBbJzR-BrbHcCWpJ8QUMyD-vWpTbwBaKAWhhPgw3AqamJEwMB7M"
+                    alt="Circuito respiratorio"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Circuito respiratorio
+                    </h3>
+
+                    <p>
+                        Conduce los gases entre la máquina y el paciente,
+                        permitiendo la inspiración y la espiración.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="anatomy-card reveal">
+
+                <img
+                    src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTtq9CfRIlkO9eAS0thG5890VcCqxU0tNFFfYBHBkCI959R3usHN0tjXf-TuHvcBIOY4Ah31i-xAkNuUoM"
+                    alt="Monitor de paciente"
+                >
+
+                <div class="anatomy-content">
+
+                    <h3>
+                        Monitor
+                    </h3>
+
+                    <p>
+                        Permite visualizar variables fisiológicas y
+                        parámetros relacionados con la ventilación y anestesia.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PARAMETROS ================= -->
+
+<section class="parameters" id="parametros">
+
+    <div class="container">
+
+        <div class="section-number">
+            05 · MONITORIZACIÓN
+        </div>
+
+        <h2 class="section-title">
+            Parámetros monitoreados
+        </h2>
+
+        <p class="section-intro">
+            La monitorización permite conocer el comportamiento del sistema
+            respiratorio y detectar cambios que puedan representar un riesgo
+            para el paciente.
+        </p>
+
+
+        <div class="parameter-grid">
+
+
+            <!-- MONITOR VISUAL -->
+
+            <div class="monitor reveal">
+
+                <div class="monitor-header">
+
+                    <div class="monitor-title">
+                        MONITOR DE ANESTESIA · EJEMPLO VISUAL
+                    </div>
+
+                    <div class="monitor-status">
+                        <span class="status-dot"></span>
+                        SISTEMA ACTIVO
+                    </div>
+
+                </div>
+
+
+                <div class="monitor-screen">
+
+
+                    <div class="waveforms">
+
+
+                        <div class="wave-row">
+
+                            <div class="wave-label">
+                                ECG
+                            </div>
+
+                            <svg class="wave-svg" viewBox="0 0 500 60" preserveAspectRatio="none">
+
+                                <polyline
+                                    class="wave-line green"
+                                    points="0,32 55,32 70,31 80,33 92,32 105,32 115,8 122,52 130,32 150,32 205,32 220,31 230,33 240,32 252,32 262,8 269,52 277,32 300,32 355,32 370,31 380,33 390,32 402,32 412,8 419,52 427,32 450,32 500,32"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="wave-row">
+
+                            <div class="wave-label">
+                                SpO₂
+                            </div>
+
+                            <svg class="wave-svg" viewBox="0 0 500 60" preserveAspectRatio="none">
+
+                                <polyline
+                                    class="wave-line"
+                                    points="0,34 20,34 35,30 50,22 65,28 80,38 95,40 110,35 125,30 140,34 155,40 170,37 185,29 200,31 215,39 230,38 245,30 260,31 275,39 290,37 305,29 320,32 335,40 350,37 365,29 380,32 395,40 410,37 425,29 440,32 455,39 470,36 485,30 500,32"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                        <div class="wave-row">
+
+                            <div class="wave-label">
+                                EtCO₂
+                            </div>
+
+                            <svg class="wave-svg" viewBox="0 0 500 60" preserveAspectRatio="none">
+
+                                <polyline
+                                    class="wave-line yellow"
+                                    points="0,43 35,43 45,20 110,20 125,40 125,43 165,43 175,20 240,20 255,40 255,43 295,43 305,20 370,20 385,40 385,43 425,43 435,20 500,20"
+                                />
+
+                            </svg>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="monitor-values">
+
+
+                        <div class="monitor-value">
+
+                            <span>SpO₂</span>
+
+                            <strong>98</strong>
+
+                            <small>%</small>
+
+                        </div>
+
+
+                        <div class="monitor-value">
+
+                            <span>FC / ECG</span>
+
+                            <strong>72</strong>
+
+                            <small>BPM</small>
+
+                        </div>
+
+
+                        <div class="monitor-value">
+
+                            <span>EtCO₂</span>
+
+                            <strong>36</strong>
+
+                            <small>mmHg</small>
+
+                        </div>
+
+
+                        <div class="monitor-value">
+
+                            <span>PA</span>
+
+                            <strong>120/80</strong>
+
+                            <small>mmHg</small>
+
+                        </div>
+
+
+                        <div class="monitor-value">
+
+                            <span>FR</span>
+
+                            <strong>14</strong>
+
+                            <small>rpm</small>
+
+                        </div>
+
+
+                        <div class="monitor-value">
+
+                            <span>VT</span>
+
+                            <strong>500</strong>
+
+                            <small>mL</small>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="monitor-footer">
+
+                    <div class="monitor-info">
+
+                        <strong>Variables respiratorias</strong>
+
+                        <span>SpO₂ · EtCO₂ · FR · VT</span>
+
+                    </div>
+
+                    <div class="monitor-info">
+
+                        <strong>Variables cardiovasculares</strong>
+
+                        <span>ECG · FC · Presión arterial</span>
+
+                    </div>
+
+                    <div class="monitor-info">
+
+                        <strong>Estado de ventilación</strong>
+
+                        <span>Presión de vía aérea · PEEP</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    FiO₂
+                </h3>
+
+                <p>
+                    Concentración de oxígeno administrada al paciente.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    Volumen corriente
+                </h3>
+
+                <p>
+                    Volumen de gas administrado durante cada ciclo respiratorio.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    Frecuencia respiratoria
+                </h3>
+
+                <p>
+                    Número de ciclos respiratorios realizados por minuto.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    Presión de vía aérea
+                </h3>
+
+                <p>
+                    Permite observar las presiones generadas durante la ventilación.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    PEEP
+                </h3>
+
+                <p>
+                    Presión positiva mantenida al final de la espiración.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    EtCO₂
+                </h3>
+
+                <p>
+                    Concentración de dióxido de carbono al final de la espiración.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    Saturación de O₂
+                </h3>
+
+                <p>
+                    Indicador de la oxigenación sanguínea mediante pulsioximetría.
+                </p>
+
+            </div>
+
+
+            <div class="parameter reveal">
+
+                <h3>
+                    Frecuencia cardiaca
+                </h3>
+
+                <p>
+                    Permite observar la respuesta cardiovascular del paciente.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEGURIDAD ================= -->
+
+<section class="security" id="seguridad">
+
+    <div class="container">
+
+        <div class="section-number">
+            06 · SEGURIDAD
+        </div>
+
+        <h2 class="section-title">
+            Seguridad y alertas
+        </h2>
+
+        <p class="section-intro">
+            Los sistemas de seguridad de una máquina de anestesia tienen
+            como finalidad detectar condiciones anormales y alertar al
+            personal clínico para permitir una intervención oportuna.
+        </p>
+
+
+        <div class="security-grid">
+
+
+            <div class="security-card alert-critical reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Falla de ventilación
+                </h3>
+
+                <p>
+                    Alerta de prioridad crítica ante una anomalía que
+                    comprometa la ventilación mecánica del paciente.
+                </p>
+
+            </div>
+
+
+            <div class="security-card alert-warning reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Presión fuera de rango
+                </h3>
+
+                <p>
+                    Advierte cuando las presiones del sistema respiratorio
+                    se encuentran fuera de los límites establecidos.
+                </p>
+
+            </div>
+
+
+            <div class="security-card alert-caution reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Suministro de gases
+                </h3>
+
+                <p>
+                    Indica posibles problemas relacionados con el suministro
+                    o disponibilidad de gases medicinales.
+                </p>
+
+            </div>
+
+
+            <div class="security-card alert-warning reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Desconexión
+                </h3>
+
+                <p>
+                    Detecta posibles desconexiones o fugas en el circuito
+                    respiratorio.
+                </p>
+
+            </div>
+
+
+            <div class="security-card alert-critical reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Apnea
+                </h3>
+
+                <p>
+                    Permite detectar la ausencia o disminución significativa
+                    de respiración durante un periodo determinado.
+                </p>
+
+            </div>
+
+
+            <div class="security-card alert-info reveal">
+
+                <span class="alert-indicator"></span>
+
+                <h3>
+                    Aviso del sistema
+                </h3>
+
+                <p>
+                    Informa sobre condiciones o eventos del sistema que
+                    requieren atención o revisión por parte del operador.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="security-note reveal">
+
+            <strong>Nota:</strong>
+            Las alarmas deben ser interpretadas por personal capacitado
+            y no sustituyen la vigilancia clínica ni la monitorización
+            del paciente.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MANTENIMIENTO ================= -->
+
+<section class="maintenance" id="mantenimiento">
+
+    <div class="container">
+
+        <div class="section-number">
+            07 · INGENIERÍA BIOMÉDICA
+        </div>
+
+        <h2 class="section-title">
+            Mantenimiento biomédico
+        </h2>
+
+        <p class="section-intro">
+            El mantenimiento de la máquina de anestesia permite conservar
+            sus condiciones de funcionamiento y detectar posibles fallas
+            antes de que afecten la seguridad del procedimiento.
+        </p>
+
+
+        <div class="maintenance-grid">
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Mantenimiento preventivo
+                </h3>
+
+                <p>
+                    Incluye inspección, limpieza, revisión de conexiones,
+                    pruebas funcionales, revisión de alarmas y comprobación
+                    de los componentes del equipo.
+                </p>
+
+            </div>
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Mantenimiento correctivo
+                </h3>
+
+                <p>
+                    Se realiza cuando se identifica una falla y busca
+                    recuperar las condiciones adecuadas de funcionamiento
+                    del equipo.
+                </p>
+
+            </div>
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Verificación funcional
+                </h3>
+
+                <p>
+                    Permite comprobar que parámetros, sensores, alarmas,
+                    ventilación y suministro de gases respondan correctamente.
+                </p>
+
+            </div>
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Seguridad eléctrica
+                </h3>
+
+                <p>
+                    Se revisan las condiciones eléctricas del equipo,
+                    conexiones, alimentación y elementos relacionados
+                    con la protección del paciente y operador.
+                </p>
+
+            </div>
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Sistema neumático
+                </h3>
+
+                <p>
+                    Se inspeccionan conexiones, mangueras, reguladores,
+                    presiones y posibles fugas dentro del sistema.
+                </p>
+
+            </div>
+
+
+            <div class="maintenance-card reveal">
+
+                <h3>
+                    Registro y trazabilidad
+                </h3>
+
+                <p>
+                    Las actividades realizadas deben quedar documentadas
+                    para facilitar el seguimiento del estado tecnológico
+                    del dispositivo.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REFERENCIA ================= -->
+
+<section class="reference">
+
+    <div class="container">
+
+        <div class="section-number">
+            08 · CONSULTA
+        </div>
+
+        <h2 class="section-title">
+            Sitios consultados
+        </h2>
+
+
+        <div class="reference-box reveal">
+
+            <p>
+                <strong>NOM-006-SSA3-2011</strong>
+                Para la práctica de la anestesiología.
+            </p>
+
+            <p>
+                Los siguientes sitios fueron consultados para complementar
+                la información relacionada con normativa, equipos de anestesia,
+                monitorización y tecnología médica.
+            </p>
+
+
+            <div class="reference-sites">
+
+
+                <a
+                    class="reference-site"
+                    href="https://dof.gob.mx/nota_detalle.php?codigo=5240668&fecha=23/03/2012"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        Diario Oficial de la Federación
+                    </h3>
+
+                    <p>
+                        Consulta de la NOM-006-SSA3-2011 para la práctica
+                        de la anestesiología.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="reference-site"
+                    href="https://platiica.economia.gob.mx/normalizacion/nom-006-ssa3-2011/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        Secretaría de Economía
+                    </h3>
+
+                    <p>
+                        Información relacionada con la norma y su proceso
+                        de normalización.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="reference-site"
+                    href="https://www.draeger.com/es_mx/Productfinder/Anaesthesia/Anaesthesia-Machines"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        Dräger · Máquinas de anestesia
+                    </h3>
+
+                    <p>
+                        Información técnica sobre equipos y sistemas
+                        de anestesia.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="reference-site"
+                    href="https://www.gehealthcare.com/es-mx/products/anesthesia-delivery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        GE HealthCare
+                    </h3>
+
+                    <p>
+                        Información sobre sistemas de administración
+                        de anestesia y tecnología clínica.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="reference-site"
+                    href="https://www.mindray.com/es/products/anesthesia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        Mindray · Anestesia
+                    </h3>
+
+                    <p>
+                        Información de estaciones de trabajo y sistemas
+                        de anestesia.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="reference-site"
+                    href="https://www.draeger.com/es_mx/Productfinder/patient-monitoring"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <h3>
+                        Dräger · Monitorización
+                    </h3>
+
+                    <p>
+                        Información sobre sistemas de monitorización
+                        de pacientes.
+                    </p>
+
+                    <span>
+                        Visitar sitio →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+            <p style="margin-top:25px;">
+
+                
+                <strong>Normativa y Legislación Biomédica</strong>.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        <strong>Máquina de Anestesia</strong>
+    </p>
+
+    <p>
+        Normativa y Legislación Biomédica · Ingeniería Biomédica
+    </p>
+
+    <p>
+        Carlos Ramírez Flores · Brenda Cecilia Rodriguez Lopez ·
+        Emannuel Varela Nava · Paul Basilio Trinidad Caro
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* ================= RECORRIDO DE GASES ================= */
+
+const gasData = [
+
+    {
+        number:"ETAPA 01",
+        title:"Fuente de gases",
+        image:"https://i.ytimg.com/vi/no0jDEnxUac/maxresdefault.jpg",
+
+        description:
+        "Los gases medicinales llegan a la máquina de anestesia mediante cilindros o mediante un sistema centralizado de suministro.",
+
+        list:[
+            "Oxígeno (O₂)",
+            "Aire medicinal",
+            "Óxido nitroso (N₂O)"
+        ]
+    },
+
+
+    {
+        number:"ETAPA 02",
+        title:"Regulación de presión",
+        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBaiOs2obdttQZJ2Tuy9oZcGBoLj1eQB7F-R9KlqMC3iQGDagp9mEqe13J&s=10",
+
+        description:
+        "La presión proveniente de la fuente de suministro se reduce y controla para proporcionar condiciones adecuadas al funcionamiento de los diferentes componentes.",
+
+        list:[
+            "Reduce la presión de entrada",
+            "Mantiene una presión adecuada",
+            "Protege los componentes del sistema"
+        ]
+    },
+
+
+    {
+        number:"ETAPA 03",
+        title:"Control de flujo",
+        image:"https://www.latecnicafluidi.it/wp-content/uploads/2019/01/anest_g-Copia.gif",
+
+        description:
+        "Los flujómetros o sistemas electrónicos permiten establecer el flujo de cada gas antes de formar la mezcla que será administrada al paciente.",
+
+        list:[
+            "Control del flujo de O₂",
+            "Control del flujo de aire",
+            "Control del flujo de N₂O",
+            "Sistemas de seguridad para evitar mezclas hipóxicas"
+        ]
+    },
+
+
+    {
+        number:"ETAPA 04",
+        title:"Vaporización",
+        image:"https://www.draeger.com/Media/Content/Products/Default/Draeger-D-Vapor-Vapor-2000-1-D-28736-2015-GruppeVapor2000.jpg",
+
+        description:
+        "La mezcla de gases atraviesa el vaporizador, donde se incorpora una concentración controlada del agente anestésico inhalatorio.",
+
+        list:[
+            "Sevoflurano",
+            "Isoflurano",
+            "Compensación frente a cambios de temperatura y flujo",
+            "Sistemas de interbloqueo entre vaporizadores"
+        ]
+    },
+
+
+    {
+        number:"ETAPA 05",
+        title:"Ventilación",
+        image:"https://www.keebovet.com/cdn/shop/products/bellow_cropped_422x.jpg?v=1571438535",
+
+        description:
+        "La mezcla de gases y agente anestésico es conducida hacia el circuito respiratorio para ser administrada al paciente mediante ventilación manual o mecánica.",
+
+        list:[
+            "Volumen corriente",
+            "Frecuencia respiratoria",
+            "Presión de vía aérea",
+            "Válvulas unidireccionales",
+            "Ventilación manual o mecánica"
+        ]
+    },
+
+
+    {
+        number:"ETAPA 06",
+        title:"Eliminación de CO₂",
+        image:"https://www.keebovet.com/cdn/shop/products/keebomed-anesthesia-machines-co2-circle-absorber-for-anesthesia-machine-17558078930_7fae1286-58a5-47ad-a4b4-e1cf1dad5c37_2048x.jpg?v=1571438515",
+
+        description:
+        "En los circuitos cerrados o semicerrados, el gas exhalado pasa por un absorbedor que elimina el dióxido de carbono antes de que el gas vuelva a circular.",
+
+        list:[
+            "Absorción de CO₂ mediante cal sodada",
+            "Permite la reinhalación controlada",
+            "Reduce el desperdicio de gases",
+            "El exceso de gas puede dirigirse al sistema de evacuación"
+        ]
+    }
+
+];
+
+
+/* ELEMENTOS */
+
+const gasCards = document.querySelectorAll(".gas-card");
+
+const gasImage = document.getElementById("gasImage");
+
+const gasNumber = document.getElementById("gasNumber");
+
+const gasTitle = document.getElementById("gasTitle");
+
+const gasDescription = document.getElementById("gasDescription");
+
+const gasList = document.getElementById("gasList");
+
+
+/* ACTUALIZAR INFORMACION */
+
+function updateGas(index){
+
+    const data = gasData[index];
+
+    gasImage.src = data.image;
+
+    gasImage.alt = data.title;
+
+    gasNumber.textContent = data.number;
+
+    gasTitle.textContent = data.title;
+
+    gasDescription.textContent = data.description;
+
+    gasList.innerHTML = "";
+
+    data.list.forEach(item => {
+
+        const li = document.createElement("li");
+
+        li.textContent = item;
+
+        gasList.appendChild(li);
+
+    });
+
+
+    gasCards.forEach(card => {
+
+        card.classList.remove("active");
+
+    });
+
+    gasCards[index].classList.add("active");
+
+}
+
+
+/* CLIC EN TARJETAS */
+
+gasCards.forEach((card, index) => {
+
+    card.addEventListener("click", () => {
+
+        updateGas(index);
+
+    });
+
+});
+
+
+/* PRIMERA ETAPA */
+
+updateGas(0);
+
+
+/* ================= ANIMACIONES ================= */
+
+const revealElements = document.querySelectorAll(".reveal");
+
+
+const observer = new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("visible");
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold:.12
+    }
+
+);
+
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+</script>
+
+</body>
+</html>
